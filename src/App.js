@@ -28,7 +28,6 @@ function App() {
             })
     }, []);
 
-//https://codingapple1.github.io/shop/data1.json
     return (
         <div>
             <Navbar bg="dark" data-bs-theme="dark">
