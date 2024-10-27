@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Nav, Navbar, Image, Card, Button, Col, Row} from "react-bootstrap";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     let [pageIdx, setPageIdx] = useState(2);
     let [welcomeText, setWelcomeText] = useState("");
 
-    useEffect(() => {
+    const showGoodsList = useCallback(function () {
         axios.get(`https://codingapple1.github.io/shop/data${pageIdx}.json`)
             .then(result => {
                 let newGoodsList = [...goodsList];
@@ -20,6 +20,10 @@ function App() {
                 console.log(error);
             });
     }, [pageIdx]);
+
+    useEffect(() => {
+        showGoodsList();
+    }, [showGoodsList]);
 
     useEffect(() => {
         axios.get("https://codingapple1.github.io/userdata.json")
